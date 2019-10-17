@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="waybillFlow">
+            <file>./tests/Unit/Services/Warehouse/WarehouseWaybillTest.php</file>
+        </testsuite>
+        <testsuite name="quoteFlow">
+            <file>./tests/Unit/Services/Quote/QuoteBasicTest.php</file>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./app/Console</directory>
+            <directory suffix=".php">./app/Models</directory>
+            <directory suffix=".php">./app/Providers</directory>
+            <directory suffix=".php">./app/Services</directory>
+        </whitelist>
+    </filter>
+    <!--<logging>-->
+        <!--<log type="coverage-html" target="/apps/working/utms-test"/>-->
+    <!--</logging>-->
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="MAIL_DRIVER" value="array"/>
+        <env name="DB_HOST" value="192.168.99.20"/>
+        <env name="DB_PORT" value="3306"/>
+        <env name="DB_DATABASE" value="test_utms_db"/>
+        <env name="DB_USERNAME" value="utms_api"/>
+        <env name="DB_PASSWORD" value="utms_api123"/>
+    </php>
+</phpunit>
