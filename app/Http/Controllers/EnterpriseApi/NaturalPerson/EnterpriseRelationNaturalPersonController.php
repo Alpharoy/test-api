@@ -16,11 +16,10 @@ use Illuminate\Support\Facades\Auth;
  *
  * @package App\Http\Controllers\EnterpriseApi\NaturalPerson
  */
-class NaturalPersonController extends BaseController
+class EnterpriseRelationNaturalPersonController extends BaseController
 {
-
     /**
-     * 自然人
+     * 自然人列表
      *
      * @param Request $request
      *

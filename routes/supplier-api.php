@@ -57,9 +57,9 @@ Route::middleware('auth:supplier')->group(function () {
         });
 
         /*
-         |--------------------------------------------------------------------------
-         | 供应商管理员模块 SupplierUser
-         |--------------------------------------------------------------------------
+        |--------------------------------------------------------------------------
+        | 供应商管理员模块 SupplierUser
+        |--------------------------------------------------------------------------
         */
         Route::apiResource('supplier-users', 'Supplier\SupplierUserController', [
             'parameters' => ['supplier-users' => 'userUUID'],
@@ -120,30 +120,43 @@ Route::middleware('auth:supplier')->group(function () {
             //审核
             Route::post('{projectUUID}/audit-status', 'ProjectController@changeAuditStatus');
         });
+
         /*
-             |--------------------------------------------------------------------------
-             | 个体工商模块 SelfEmploy
-             |--------------------------------------------------------------------------
-             */
-        Route::prefix('self-employs')->namespace('SelfEmploy')->group(function () {
-            // 个体工商资源CURD
-            Route::apiResource('', 'SelfEmployController', [
-                'parameters' => ['' => 'selfEmployUUID'],
-                'only'       => ['index', 'show',],
-            ]);
+        |--------------------------------------------------------------------------
+        | 个体工商模块 SelfEmploy
+        |--------------------------------------------------------------------------
+        */
+        Route::namespace('SelfEmploy')->group(function () {
+            Route::get('suppliers/self-employs', 'SupplierRelationSelfEmployController@index');
+            Route::get('suppliers/self-employs/{selfEmployUUID}', 'SupplierRelationSelfEmployController@show');
+            Route::get('self-employs', 'SelfEmployController@index');
         });
 
         /*
-       |--------------------------------------------------------------------------
-       | 自然人模块 NaturalPerson
-       |--------------------------------------------------------------------------
+        |--------------------------------------------------------------------------
+        | 自然人模块 NaturalPerson
+        |--------------------------------------------------------------------------
         */
-        Route::prefix('natural-persons')->namespace('NaturalPerson')->group(function () {
-            // 个体工商资源CURD
-            Route::apiResource('', 'NaturalPersonController', [
-                'parameters' => ['' => 'userUUID'],
-                'only'       => ['index', 'show'],
+        Route::namespace('NaturalPerson')->group(function () {
+            Route::get('suppliers/natural-persons', 'SupplierRelationNaturalPersonController@index');
+            Route::get('suppliers/natural-persons/{userUUID}', 'SupplierRelationNaturalPersonController@show');
+            Route::get('natural-persons', 'NaturalPersonController@index');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | 任务订单
+        |--------------------------------------------------------------------------
+        */
+        Route::prefix('tasks')->namespace('Task')->group(function () {
+            // 拒绝
+            Route::put('{taskUUID}/reject', 'TaskController@reject');
+            Route::put('{taskUUID}/accept', 'TaskController@accept');
+            Route::apiResource('', 'TaskController', [
+                'parameters' => ['' => 'taskUUID'],
+                'only'       => ['index', 'show', 'update'],
             ]);
+
         });
     });
 });

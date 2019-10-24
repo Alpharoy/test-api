@@ -40,6 +40,9 @@ class NaturalPersonResource extends BaseResource
             'source_from'               => $this->source_from,
             'source_from_name'          => cons()->valueLang('common.source_from',
                 $this->source_from),
+
+            //银行卡
+            'natural_person_bank_cards' => NaturalPersonBankCardResource::collection($this->whenLoaded('naturalPersonBankCards')),
         ];
     }
 

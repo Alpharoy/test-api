@@ -156,8 +156,8 @@ class Contract extends Model
      */
     public function getCanRenewAttribute()
     {
-        // 审核通过并且过了有效期
-        return $this->status === cons('common.audit_status.passed') && $this->valid_time < Carbon::now();
+        // 最新合约 && 审核通过并且过了有效期
+        return $this->is_valid && $this->status === cons('common.audit_status.passed') && $this->valid_time < Carbon::now();
     }
 
     /**

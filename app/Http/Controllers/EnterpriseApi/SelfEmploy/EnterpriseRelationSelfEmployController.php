@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Auth;
  *
  * @package App\Http\Controllers\EnterpriseApi\SelfEmploy
  */
-class SelfEmployController extends BaseController
+class EnterpriseRelationSelfEmployController extends BaseController
 {
     /**
-     *企业端个体户列表
+     * 个体户列表
      *
      * @param Request $request
      *
@@ -49,7 +49,7 @@ class SelfEmployController extends BaseController
     }
 
     /**
-     * 详情
+     * 个体户详情
      *
      * @param \App\Http\Requests\EnterpriseApi\Request $request
      * @param                                          $selfEmployUUID

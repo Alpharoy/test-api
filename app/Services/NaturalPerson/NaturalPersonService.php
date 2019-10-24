@@ -130,6 +130,9 @@ class NaturalPersonService extends BaseService
                 break;
             case cons('common.audit_status.passed'):
                 $allow = $naturalPerson->can_audit_passed;
+                if (!$naturalPerson->is_name_verified) {
+                    throw new ForbiddenException('未通过实名认证，禁止审核通过');
+                }
                 break;
             default:
         }

@@ -47,7 +47,7 @@ class LoginController extends BaseController
 
         // 获取当前企业信息
         $enterprise = Enterprise::where('enterprise_uuid', $enterpriseUser->enterprise_uuid)->firstOrFail();
-        if ($enterprise) {
+        if ($enterprise->status !== cons('common.audit_status.passed')) {
             throw new ForbiddenException('当前所在企业未审核通过，禁止登录');
         }
 

@@ -171,6 +171,7 @@ Route::middleware('auth:admin')->group(function () {
                 'only'       => ['index', 'show'],
             ]);
         });
+
         /*
         |--------------------------------------------------------------------------
         | 个体工商模块 SelfEmploy
@@ -185,7 +186,8 @@ Route::middleware('auth:admin')->group(function () {
                 'only'       => ['index', 'show', 'update', 'store'],
             ]);
         });
-        /*
+
+       /*
        |--------------------------------------------------------------------------
        | 个体工商管理员模块 SelfEmployUser
        |--------------------------------------------------------------------------
@@ -214,14 +216,27 @@ Route::middleware('auth:admin')->group(function () {
         });
 
         /*
-      |--------------------------------------------------------------------------
-      | 自然人银行卡模块 NaturalPersonBankCard
-      |--------------------------------------------------------------------------
-      */
+        |--------------------------------------------------------------------------
+        | 自然人银行卡模块 NaturalPersonBankCard
+        |--------------------------------------------------------------------------
+        */
         Route::prefix('natural-persons/{userUUID}')->group(function () {
             Route::apiResource('bank-cards', 'NaturalPerson\NaturalPersonBankCardController', [
                 'parameters' => ['bank-cards' => 'bankCardUUID'],
                 'only'       => ['index', 'show', 'update', 'store', 'destroy'],
+            ]);
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | 任务订单
+        |--------------------------------------------------------------------------
+        */
+        Route::prefix('tasks')->namespace('Task')->group(function () {
+            //项目资源CURD
+            Route::apiResource('', 'TaskController', [
+                'parameters' => ['' => 'taskUUID'],
+                'only'       => ['index', 'show'],
             ]);
         });
     });

@@ -28,9 +28,6 @@ Route::middleware('auth:enterprise')->group(function () {
     // 更新密码
     Route::patch('me/password', 'Enterprise\MeController@updatePassword')->middleware('hidden_request');
 
-    // 供应商行业类型
-    Route::get('supplier-subjects', 'Supplier\SupplierSubjectController@index');
-
     /*
     |--------------------------------------------------------------------------
     | permission:xxx 中间件，需要权限验证
@@ -49,7 +46,6 @@ Route::middleware('auth:enterprise')->group(function () {
                 'only'       => ['index', 'show', 'update'],
             ]);
         });
-
 
         /*
         |--------------------------------------------------------------------------
@@ -117,35 +113,45 @@ Route::middleware('auth:enterprise')->group(function () {
         |--------------------------------------------------------------------------
         */
         Route::prefix('suppliers')->namespace('Supplier')->group(function () {
+            // 供应商行业类型
+            Route::get('{supplierUUID}/supplier-subjects', 'SupplierSubjectController@index');
             Route::apiResource('', 'SupplierController', [
                 'parameters' => ['' => 'supplierUUID'],
                 'only'       => ['index'],
             ]);
         });
+
         /*
-       |--------------------------------------------------------------------------
-       | 个体工商模块 SelfEmploy
-       |--------------------------------------------------------------------------
-       */
-        Route::prefix('self-employs')->namespace('SelfEmploy')->group(function () {
-            // 个体工商资源CURD
-            Route::apiResource('', 'SelfEmployController', [
-                'parameters' => ['' => 'selfEmployUUID'],
-                'only'       => ['index', 'show',],
-            ]);
+        |--------------------------------------------------------------------------
+        | 个体工商模块 SelfEmploy
+        |--------------------------------------------------------------------------
+        */
+        Route::namespace('SelfEmploy')->group(function () {
+            Route::get('enterprises/self-employs', 'EnterpriseRelationSelfEmployController@index');
+            Route::get('enterprises/self-employs/{selfEmployUUID}', 'EnterpriseRelationSelfEmployController@show');
+            Route::get('self-employs', 'SelfEmployController@index');
         });
 
+        /*
+        |--------------------------------------------------------------------------
+        | 自然人模块 NaturalPerson
+        |--------------------------------------------------------------------------
+        */
+        Route::namespace('NaturalPerson')->group(function () {
+            Route::get('enterprises/natural-persons', 'EnterpriseRelationNaturalPersonController@index');
+            Route::get('enterprises/natural-persons/{userUUID}', 'EnterpriseRelationNaturalPersonController@show');
+            Route::get('natural-persons', 'NaturalPersonController@index');
+        });
 
         /*
-       |--------------------------------------------------------------------------
-       | 自然人模块 NaturalPerson
-       |--------------------------------------------------------------------------
+        |--------------------------------------------------------------------------
+        | 任务订单
+        |--------------------------------------------------------------------------
         */
-        Route::prefix('natural-persons')->namespace('NaturalPerson')->group(function () {
-            // 个体工商资源CURD
-            Route::apiResource('', 'NaturalPersonController', [
-                'parameters' => ['' => 'userUUID'],
-                'only'       => ['index', 'show',],
+        Route::prefix('tasks')->namespace('Task')->group(function () {
+            Route::apiResource('', 'TaskController', [
+                'parameters' => ['' => 'taskUUID'],
+                'only'       => ['index', 'show', 'update', 'store', 'destroy'],
             ]);
         });
     });

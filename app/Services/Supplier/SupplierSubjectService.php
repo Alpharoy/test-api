@@ -99,9 +99,14 @@ class SupplierSubjectService extends BaseService
      */
     public static function openStatusEffect(SupplierSubject $supplierSubject)
     {
+        $exists = SupplierSubject::where('supplier_uuid', $supplierSubject->supplier_uuid)->where('industry_type_code',
+            $supplierSubject->industry_type_code)->where('is_open', true)->exists();
+
+        // 有一个科目被启用，则项目都被启用
+        // 全部都被禁用，则项目都被禁用
         Project::where('supplier_uuid', $supplierSubject->supplier_uuid)->where('industry_type_code',
             $supplierSubject->industry_type_code)->where('is_industry_type_open',
-            !$supplierSubject->is_open)->update(['is_industry_type_open' => $supplierSubject->is_open]);
+            !$exists)->update(['is_industry_type_open' => $exists]);
         return true;
     }
 }

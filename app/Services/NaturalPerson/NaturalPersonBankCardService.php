@@ -9,6 +9,7 @@ use App\Models\NaturalPerson\NaturalPersonBankCard;
 use App\Services\BaseService;
 use Illuminate\Support\Arr;
 use Urland\Exceptions\Client\BadRequestException;
+use Urland\Exceptions\Client\ForbiddenException;
 use UTMS\Validator\LuhnVerify;
 
 class NaturalPersonBankCardService extends BaseService
@@ -24,7 +25,10 @@ class NaturalPersonBankCardService extends BaseService
     public static function store($userUUID, $bankCardData = [])
     {
         $naturalPerson = NaturalPerson::where('user_uuid', $userUUID)->firstOrFail();
-        $bankCardData  = array_merge($bankCardData, [
+        if (!$naturalPerson->is_name_verified) {
+            throw new ForbiddenException('未通过实名认证，禁止绑定银行卡');
+        }
+        $bankCardData = array_merge($bankCardData, [
             'user_uuid'   => $userUUID,
             'card_holder' => $naturalPerson->user_name,
         ]);

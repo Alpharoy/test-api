@@ -65,8 +65,10 @@ class ContractController extends BaseController
      */
     public function store(ContractCreateRequest $request)
     {
-        $inputs   = $request->validated();
-        $contract = ContractService::store(cons('contract.group.enterprise'), Auth::user()->enterprise_uuid, $inputs);
+        $inputs           = $request->validated();
+        $inputs['status'] = cons('common.audit_status.unaudited');  // 初始状态为未审核
+        $contract         = ContractService::store(cons('contract.group.enterprise'), Auth::user()->enterprise_uuid,
+            $inputs);
         return new ContractResource($contract);
     }
 
@@ -80,9 +82,10 @@ class ContractController extends BaseController
      */
     public function update(ContractUpdateRequest $request, $contractUUID)
     {
-        $inputs   = $request->validated();
-        $contract = $this->permission($contractUUID);
-        $contract = ContractService::update($contract, $inputs);
+        $inputs           = $request->validated();
+        $contract         = $this->permission($contractUUID);
+        $inputs['status'] = cons('common.audit_status.unaudited');  // 修改状态为未审核，只有未审核或审核失败时才能更新合同信息
+        $contract         = ContractService::update($contract, $inputs);
         return new ContractResource($contract);
     }
 

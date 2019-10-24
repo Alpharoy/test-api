@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
  *
  * @package App\Http\Controllers\SupplierApi\NaturalPerson
  */
-class NaturalPersonController extends BaseController
+class SupplierRelationNaturalPersonController extends BaseController
 {
     /**
      * 自然人列表
