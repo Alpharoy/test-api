@@ -1,0 +1,47 @@
+mixed-port: 7890
+allow-lan: true
+mode: Rule
+log-level: info
+proxies:
+  - {name: 美国 ☆☆ 01 ☆NTT☆   1.2倍率, server: azure-f4s-hk.transfer-xray.tk, port: 31402, type: vmess, uuid: 8d396cdc-3be7-4893-a907-b2e90c9c9644, alterId: 100, cipher: auto, tls: false}
+  - {name: 日本 ☆☆ 01 ☆GMO☆  1.2倍率, server: 52.229.169.48, port: 31402, type: vmess, uuid: 8d396cdc-3be7-4893-a907-b2e90c9c9644, alterId: 64, cipher: auto, tls: false}
+  - {name: 美国 ☆☆ 02 ☆NTT☆   1.2倍率, server: zza1.uuv2.uk, port: 5401, type: vmess, uuid: bd420812-8dcd-4f5e-8716-ecfadcf0fbbb, alterId: 1, cipher: auto, tls: true, network: ws, ws-path: /@mftizi, ws-headers: {Host: kr02.uuv2.uk}}
+  - {name: 德国 ☆☆ 01 ☆GMO☆  1.2倍率, server: 104.20.130.175, port: 443, type: vmess, uuid: 3b5e258e-8c5e-45d3-b7d2-02c8f5fc0bb2, alterId: 64, cipher: auto, tls: true, network: ws, ws-path: /, ws-headers: {Host: cdnde.irteyz.today}}
+  - {name: 德国 ☆☆ 02 ☆GMO☆  1.2倍率, server: 104.25.175.69, port: 443, type: vmess, uuid: 3b5e258e-8c5e-45d3-b7d2-02c8f5fc0bb2, alterId: 64, cipher: auto, tls: true, network: ws, ws-path: /, ws-headers: {Host: cdnde.irteyz.today}}
+  - {name: 德国 ☆☆ 03 ☆GMO☆  1.2倍率, server: 104.22.3.3, port: 443, type: vmess, uuid: 3b5e258e-8c5e-45d3-b7d2-02c8f5fc0bb2, alterId: 64, cipher: auto, tls: true, network: ws, ws-path: /, ws-headers: {Host: cdnde.irteyz.today}}
+  - {name: 美国 ☆☆ 02 ☆NTT☆   1.2倍率 2, server: www.92726054.xyz, port: 443, type: vmess, uuid: d3cbe556-8db3-47e0-8ef1-06b2cce00411, alterId: 64, cipher: auto, tls: true, network: ws, ws-path: /path/310910211916, ws-headers: {Host: www.92726054.xyz}}
+  - {name: 德国 ☆☆ 04 ☆GMO☆  1.2倍率, server: 104.21.48.161, port: 443, type: vmess, uuid: 3b5e258e-8c5e-45d3-b7d2-02c8f5fc0bb2, alterId: 64, cipher: auto, tls: true, network: ws, ws-path: /, ws-headers: {Host: cdnde.irteyz.today}}
+  - {name: 美国 ☆☆ 03 ☆NTT☆   1.2倍率, server: 104.16.237.48, port: 443, type: vmess, uuid: 58f25243-623d-4c8b-9c47-095b4b54257f, alterId: 64, cipher: auto, tls: true, network: ws, ws-path: /ray, ws-headers: {Host: v2ray.gd1214b.workers.dev}}
+  - {name: 德国 ☆☆ 05 ☆GMO☆  1.2倍率, server: 104.18.7.138, port: 443, type: vmess, uuid: 3b5e258e-8c5e-45d3-b7d2-02c8f5fc0bb2, alterId: 64, cipher: auto, tls: true, network: ws, ws-path: /, ws-headers: {Host: cdnde.irteyz.today}}
+proxy-groups:
+  - name: 🔰 SELECT(@BN_CHANLL)
+    type: select
+    proxies:
+      - ♻️ BESTPING(@BN_CHANLL)
+      - 美国 ☆☆ 01 ☆NTT☆   1.2倍率
+      - 日本 ☆☆ 01 ☆GMO☆  1.2倍率
+      - 美国 ☆☆ 02 ☆NTT☆   1.2倍率
+      - 德国 ☆☆ 01 ☆GMO☆  1.2倍率
+      - 德国 ☆☆ 02 ☆GMO☆  1.2倍率
+      - 德国 ☆☆ 03 ☆GMO☆  1.2倍率
+      - 美国 ☆☆ 02 ☆NTT☆   1.2倍率 2
+      - 德国 ☆☆ 04 ☆GMO☆  1.2倍率
+      - 美国 ☆☆ 03 ☆NTT☆   1.2倍率
+      - 德国 ☆☆ 05 ☆GMO☆  1.2倍率
+  - name: ♻️ BESTPING(@BN_CHANLL)
+    type: url-test
+    url: https://www.google.com
+    interval: 300
+    proxies:
+      - 美国 ☆☆ 01 ☆NTT☆   1.2倍率
+      - 日本 ☆☆ 01 ☆GMO☆  1.2倍率
+      - 美国 ☆☆ 02 ☆NTT☆   1.2倍率
+      - 德国 ☆☆ 01 ☆GMO☆  1.2倍率
+      - 德国 ☆☆ 02 ☆GMO☆  1.2倍率
+      - 德国 ☆☆ 03 ☆GMO☆  1.2倍率
+      - 美国 ☆☆ 02 ☆NTT☆   1.2倍率 2
+      - 德国 ☆☆ 04 ☆GMO☆  1.2倍率
+      - 美国 ☆☆ 03 ☆NTT☆   1.2倍率
+      - 德国 ☆☆ 05 ☆GMO☆  1.2倍率
+rules:
+ - MATCH,♻️ BESTPING(@BN_CHANLL),🔰 SELECT(@BN_CHANLL)
